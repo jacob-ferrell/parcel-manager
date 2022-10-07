@@ -5,7 +5,8 @@ const Input = (props) => {
         <div>
             <input onChange={props.handleChange}
             placeholder="Paste Content Here"></input>
-            <button>Count</button>
+            <button onClick={props.handleClick}>Count</button>
+            <div>{props.counts}</div>
         </div>
     )
 }
