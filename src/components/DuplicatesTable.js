@@ -1,8 +1,17 @@
 
 const DuplicatesTable = (props) => {
 
+    const duplicates = props.duplicates.map(dup => {
+        return (
+            <tr key={dup[0]}>
+                <td>{dup[0]}</td>
+                <td>{dup[1]}</td>
+            </tr>
+        )
+    })
+
     return (
-        <table className="table table-sm duplicates">
+        <table className="table table-sm table-bordered duplicates">
             <thead>
                 <tr>
                     <th>Order #</th>
@@ -10,8 +19,7 @@ const DuplicatesTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                <td></td>
-                <td></td>
+                {duplicates}
             </tbody>
         </table>
     )

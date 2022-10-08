@@ -5,7 +5,7 @@ import MainTable from './components/MainTable';
 import CountsTable from './components/CountsTable';
 import DuplicatesTable from './components/DuplicatesTable';
 import {getTodaysDate, getCounts} from './modules/DateFunctions';
-import {getOrderData} from './modules/OrderDataFunctions';
+import {getOrderData, getDuplicates} from './modules/OrderDataFunctions';
 
 function App() {
 
@@ -18,6 +18,8 @@ function App() {
   const [counts, setCounts] = useState([]);
 
   const [currentStore, setCurrentStore] = useState('');
+
+  const [duplicates, setDuplicates] = useState([]);
 
   const [stores, setStores] = useState(
     {
@@ -50,6 +52,7 @@ function App() {
     setCounts(getCounts(data));
     setCurrentStore(getStore(data));
     getOrderData(data);
+    setDuplicates(getDuplicates(data));
   }
 
   const handleCountClick = e => {
@@ -107,7 +110,7 @@ function App() {
           <CountsTable counts={counts} />
         </div>
         <div className='col-md-6'>
-          <DuplicatesTable />
+          <DuplicatesTable duplicates={duplicates}/>
         </div>
       </div>
       <MainTable stores={stores}/>

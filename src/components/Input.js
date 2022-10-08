@@ -10,7 +10,7 @@ const Input = (props) => {
                     </textarea>
                     
             </div>
-            <button className="btn w-100 btn-primary" onClick={props.handleClick}>Count</button>
+            <button className="btn w-100 btn-primary" onClick={props.handleClick}>Add To Main Table</button>
         </div>
     )
 }

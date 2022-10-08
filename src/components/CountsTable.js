@@ -3,7 +3,7 @@ const CountsTable = (props) => {
     const counts = props.counts
 
     return (
-        <table className="table table-sm counts">
+        <table className="table table-sm table-striped counts">
             <tbody>
                 <tr>
                     <th>Past Due</th>
