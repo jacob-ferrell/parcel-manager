@@ -3,9 +3,13 @@ import { useState } from 'react';
 import Input from './components/Input';
 import MainTable from './components/MainTable';
 import CountsTable from './components/CountsTable';
+import DuplicatesTable from './components/DuplicatesTable';
 import {getTodaysDate, getCounts} from './modules/DateFunctions';
+import {getOrderData} from './modules/OrderDataFunctions';
 
 function App() {
+
+  let data;
 
   const [input, setInput] = useState('');
 
@@ -40,12 +44,12 @@ function App() {
   )
 
   const handleChange = e => {
-    const data = e.target.value;
+    data = e.target.value;
     setInput(data);
     setTodaysDate(getTodaysDate());
     setCounts(getCounts(data));
     setCurrentStore(getStore(data));
-
+    getOrderData(data);
   }
 
   const handleCountClick = e => {
@@ -98,7 +102,14 @@ function App() {
     <div className="App">
       <Input handleChange={handleChange} counts={counts}
       handleClick={handleCountClick}/>
-      <CountsTable counts={counts}></CountsTable>
+      <div className='row'>
+        <div className='col-md-6'>
+          <CountsTable counts={counts} />
+        </div>
+        <div className='col-md-6'>
+          <DuplicatesTable />
+        </div>
+      </div>
       <MainTable stores={stores}/>
     </div>
   );

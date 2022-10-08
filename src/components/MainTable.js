@@ -10,10 +10,9 @@ const MainTable = (props) => {
             counts = stores[name].counts;
         }
         return (
-            <tbody>
                 <tr key={name}>
-                    <td>{stores[name].number}</td>
-                    <td>{name}</td>
+                    <td className='store'>{stores[name].number}</td>
+                    <td className='city'>{name}</td>
                     <td>{counts[0]}</td>
                     <td>{counts[1]}</td>
                     <td>{counts[2]}</td>
@@ -21,22 +20,24 @@ const MainTable = (props) => {
                     <td>{counts[4]}</td>
                     <td>{counts[5]}</td> 
                 </tr>
-            </tbody>
         )
     })
     return (
-        <table>
-        <tr>
-            <th>Store</th>
-            <th>City</th>
-            <th>Awaiting Pickup</th>
-            <th>Past Due</th>
-            <th>Today</th>
-            <th>Future</th>
-            <th>No In-Hand</th>
-            <th>Update Required</th>
-        </tr>
-        {storeRows}
+        <table className="table table-dark table-sm table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th className='store'>Store</th>
+                    <th className='city'>City</th>
+                    <th>Awaiting Pickup</th>
+                    <th>Past Due</th>
+                    <th>Today</th>
+                    <th>Future</th>
+                    <th>No In-Hand</th>
+                    <th>Update Required</th>
+                </tr>
+            </thead>
+            <tbody>{storeRows}</tbody>
+        
     </table>
     )
 }

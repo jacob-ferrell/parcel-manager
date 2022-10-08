@@ -1,4 +1,4 @@
-table, td, th {
+/* table, td, th {
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -13,4 +13,16 @@ th, td {
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
+} */
+
+td, th {
+    text-align: center;
+}
+
+.store, .city {
+    text-align: left;
+}
+
+.counts th {
+    text-align: left;
 }

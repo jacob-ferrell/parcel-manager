@@ -3,9 +3,14 @@ const Input = (props) => {
 
     return (
         <div>
-            <input onChange={props.handleChange}
-            placeholder="Paste Content Here"></input>
-            <button onClick={props.handleClick}>Count</button>
+            <div className='form-group'>
+                    <textarea className='form-control' rows='3'
+                    onChange={props.handleChange}
+                    placeholder="Paste Content Here">
+                    </textarea>
+                    
+            </div>
+            <button className="btn w-100 btn-primary" onClick={props.handleClick}>Count</button>
         </div>
     )
 }
