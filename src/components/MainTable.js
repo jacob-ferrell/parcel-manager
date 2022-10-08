@@ -1,28 +1,27 @@
 import '../styles/MainTable.css';
+import { useEffect } from 'react';
 
 const MainTable = (props) => {
 
     const storeRows = Object.keys(props.stores).map(name => {
         const stores = props.stores;
-        let counts = [];
+        let counts = Array(6).fill('');
         if (stores[name].hasOwnProperty('counts')) {
             counts = stores[name].counts;
         }
         return (
-            <tr>
-                <td>{stores[name].number}</td>
-                <td>{name}</td>
-                 <td>{counts[0] || 0}</td>
-                 <td>{counts[1] || ''}</td>
-                 <td>{counts[2] || ''}</td>
-                 <td>{counts[3] || ''}</td>
-                 <td>{counts[4] || ''}</td>
-                 <td>{counts[5] || ''}</td>
-                 
-                    
-                
-                
-            </tr>
+            <tbody>
+                <tr key={name}>
+                    <td>{stores[name].number}</td>
+                    <td>{name}</td>
+                    <td>{counts[0]}</td>
+                    <td>{counts[1]}</td>
+                    <td>{counts[2]}</td>
+                    <td>{counts[3]}</td>
+                    <td>{counts[4]}</td>
+                    <td>{counts[5]}</td> 
+                </tr>
+            </tbody>
         )
     })
     return (

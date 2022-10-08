@@ -1,6 +1,8 @@
+import './styles/App.css'
 import { useState } from 'react';
 import Input from './components/Input';
 import MainTable from './components/MainTable';
+import CountsTable from './components/CountsTable';
 import {getTodaysDate, getCounts} from './modules/DateFunctions';
 
 function App() {
@@ -37,20 +39,25 @@ function App() {
   }
   )
 
-  const handleChange = e => setInput(e.target.value);
-
-  const handleCountClick = e => {
+  const handleChange = e => {
+    const data = e.target.value;
+    setInput(data);
     setTodaysDate(getTodaysDate());
-    console.log(todaysDate);
-    setCounts(getCounts(input));
-    setCurrentStore(getStore());
-    if (!currentStore) return;
-    let storesCopy = { ...stores };
-    storesCopy[currentStore].counts = [...counts];
-    setStores(storesCopy);
+    setCounts(getCounts(data));
+    setCurrentStore(getStore(data));
+
   }
 
-  function getStore() {
+  const handleCountClick = e => {
+    if (!currentStore) return;
+    setStores(oldStores => {
+      let newVal = {...oldStores};
+      newVal[currentStore].counts = counts;
+      return newVal;
+    })
+  }
+
+  function getStore(input) {
     if (!input.includes('|') || !input.includes(' FL')) return '';
     let match = input.slice(input.indexOf('|') + 2, input.indexOf(' FL'));
     return match;
@@ -91,6 +98,7 @@ function App() {
     <div className="App">
       <Input handleChange={handleChange} counts={counts}
       handleClick={handleCountClick}/>
+      <CountsTable counts={counts}></CountsTable>
       <MainTable stores={stores}/>
     </div>
   );
