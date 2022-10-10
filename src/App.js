@@ -60,6 +60,17 @@ function App() {
       newVal[currentStore].counts = counts;
       return newVal;
     })
+    console.log(stores)
+  }
+
+  const fillRow = e => {
+    const store = e.target.dataset.store;
+    const fill = e.target.dataset.fill;
+    setStores(oldStores => {
+      let newVal = {...oldStores};
+      newVal[store].counts = Array(6).fill(fill);
+      return newVal;
+    })
   }
 
   function getStore(input) {
@@ -111,7 +122,7 @@ function App() {
           <DuplicatesTable duplicates={duplicates}/>
         </div>
       </div>
-      <MainTable stores={stores}/>
+      <MainTable stores={stores} fillRow={fillRow}/>
     </div>
   );
 }

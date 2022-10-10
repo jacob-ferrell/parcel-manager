@@ -1,18 +1,19 @@
 import '../styles/MainTable.css';
 import { useEffect } from 'react';
+import FillButtons from './FillButtons';
 
 const MainTable = (props) => {
 
     const storeRows = Object.keys(props.stores).map(name => {
         const stores = props.stores;
-        let counts = Array(6).fill('');
-        if (stores[name].hasOwnProperty('counts')) {
-            counts = stores[name].counts;
-        }
+        let counts = stores[name].counts || Array(6).fill('');
+
         return (
                 <tr key={name}>
                     <td className='store'>{stores[name].number}</td>
-                    <td className='city'>{name}</td>
+                    <td className='city'>{name}
+                    <FillButtons name={name} fillRow={props.fillRow}/>
+                    </td>
                     <td>{counts[0]}</td>
                     <td>{counts[1]}</td>
                     <td>{counts[2]}</td>
