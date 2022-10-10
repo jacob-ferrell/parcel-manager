@@ -4,7 +4,7 @@ const FillButtons = props => {
     const store = props.name;
 
     return (
-        <div>
+        <div className="fill-buttons">
             <button className='btn btn-sm btn-info' data-store={store}
             onClick={props.fillRow}
             data-fill='0'><i className='fa-solid fa-0'></i>

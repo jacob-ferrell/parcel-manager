@@ -4,6 +4,7 @@ import Input from './components/Input';
 import MainTable from './components/MainTable';
 import CountsTable from './components/CountsTable';
 import DuplicatesTable from './components/DuplicatesTable';
+import CopyTable from './components/CopyTable';
 import {getTodaysDate, getCounts} from './modules/DateFunctions';
 import {getOrderData, getDuplicates} from './modules/OrderDataFunctions';
 
@@ -60,55 +61,58 @@ function App() {
       newVal[currentStore].counts = counts;
       return newVal;
     })
-    console.log(stores)
   }
+
+  const handleCopyClick = e => {
+    copyTable();
+  }
+
+  const copyTable = () => {
+    if (!document.createRange || !window.getSelection) return;
+    const table = document.querySelector('#copy-table');
+    let range = document.createRange();
+    let sel = window.getSelection();
+    sel.removeAllRanges();
+
+    try {
+      range.selectNodeContents(table);
+      sel.addRange(range);
+    } catch (e) {
+      range.selectNode(table);
+      sel.addRange(range);
+    }    
+    document.execCommand('copy');
+    sel.removeAllRanges();
+    console.log('copied', table);
+  }
+
 
   const fillRow = e => {
     const store = e.target.dataset.store;
     const fill = e.target.dataset.fill;
     setStores(oldStores => {
       let newVal = {...oldStores};
+      let counts = newVal[store].counts
+      if (fill == '') {
+        delete newVal[store].counts;
+        return newVal;
+      }
       newVal[store].counts = Array(6).fill(fill);
       return newVal;
     })
   }
 
+  const tableIsFilled = () => {
+    const isFilled =  Object.keys(stores).every(store => {
+      return stores[store].hasOwnProperty('counts');
+    })
+    return isFilled;
+  }
+
   function getStore(input) {
     if (!input.includes('|') || !input.includes(' FL')) return '';
-    let match = input.slice(input.indexOf('|') + 2, input.indexOf(' FL'));
-    return match;
+    return input.slice(input.indexOf('|') + 2, input.indexOf(' FL'));
 }
-
-{/*   function getTodaysDate() {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    let mm = (today.getMonth() + 1).toString().padStart(2, '0');
-    let dd = (today.getDate()).toString().padStart(2, '0');
-    const date = mm + '/' + dd + '/' + yyyy;
-    return date;
-}
-
-  function getCounts() {
-    let totalPackages = getTotalPackages();
-    let [pastDue, dueToday, future] = [0, 0, 0];
-    let dates = getInHandDates();
-    let noInHand = totalPackages - dates.length;
-    const todayParsed = Date.parse(todaysDate);
-    dates.forEach(date => {
-        const parsed = Date.parse(date);
-        if (parsed == todayParsed) dueToday++;
-        else if (todayParsed > parsed) pastDue++;
-        else if (todayParsed < parsed) future++;
-    });
-    setCounts([pastDue, dueToday, future, noInHand]);
-  }
-
-  function getInHandDates() {
-    return input.match(/\d{2}[/]\d{2}[/]\d{4}/g) || [];
-  }
-  function getTotalPackages() {
-    return (input.match(/In-Hand\sDate\:/g) || []).length;
-  } */}
 
   return (
     <div className="App">
@@ -122,7 +126,12 @@ function App() {
           <DuplicatesTable duplicates={duplicates}/>
         </div>
       </div>
+      {tableIsFilled() &&
+        <button className={'btn btn-info w-100'}
+        onClick={handleCopyClick}>Copy Table</button>
+      }
       <MainTable stores={stores} fillRow={fillRow}/>
+        <CopyTable stores={stores} tableIsFilled={tableIsFilled}/>
     </div>
   );
 }

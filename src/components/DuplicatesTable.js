@@ -11,7 +11,8 @@ const DuplicatesTable = (props) => {
     })
 
     return (
-        <table className="table table-sm table-bordered duplicates">
+        <table className="table table-sm table-striped 
+        table-bordered duplicates">
             <thead>
                 <tr>
                     <th>Order #</th>

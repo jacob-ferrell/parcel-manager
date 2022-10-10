@@ -1,3 +1,14 @@
 html {
     background-color: rgb(255, 255, 255);
 }
+.fill-buttons {
+    display: none;
+}
+
+#copy-table, #copy-table td {
+    border: 1px solid black;
+}
+
+#copy-table {
+    opacity: 0;
+}
