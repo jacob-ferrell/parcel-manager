@@ -1,6 +1,9 @@
 
 const Input = (props) => {
 
+    const buttonText = props.currentStore ? 'Add To Main Table'
+        : 'Include Entire Page To Add To Table';
+
     return (
         <div>
             <div className='form-group'>
@@ -10,7 +13,9 @@ const Input = (props) => {
                     </textarea>
                     
             </div>
-            <button className="btn w-100 btn-primary" onClick={props.handleClick}>Add To Main Table</button>
+            <button className="btn w-100 btn-primary" 
+            disabled={!props.currentStore}
+            onClick={props.handleClick}>{buttonText}</button>
         </div>
     )
 }

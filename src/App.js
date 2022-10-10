@@ -9,8 +9,6 @@ import {getOrderData, getDuplicates} from './modules/OrderDataFunctions';
 
 function App() {
 
-  let data;
-
   const [input, setInput] = useState('');
 
   const [todaysDate, setTodaysDate] = useState(getTodaysDate);
@@ -46,7 +44,7 @@ function App() {
   )
 
   const handleChange = e => {
-    data = e.target.value;
+    const data = e.target.value;
     setInput(data);
     setTodaysDate(getTodaysDate());
     setCounts(getCounts(data));
@@ -104,7 +102,7 @@ function App() {
   return (
     <div className="App">
       <Input handleChange={handleChange} counts={counts}
-      handleClick={handleCountClick}/>
+      currentStore={currentStore} handleClick={handleCountClick}/>
       <div className='row'>
         <div className='col-md-6'>
           <CountsTable counts={counts} />
