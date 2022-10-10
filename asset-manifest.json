@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/parcel-manager/static/css/main.c7e4ff50.css",
-    "main.js": "/parcel-manager/static/js/main.77ee69d8.js",
+    "main.js": "/parcel-manager/static/js/main.44aed5bf.js",
     "index.html": "/parcel-manager/index.html",
     "main.c7e4ff50.css.map": "/parcel-manager/static/css/main.c7e4ff50.css.map",
-    "main.77ee69d8.js.map": "/parcel-manager/static/js/main.77ee69d8.js.map"
+    "main.44aed5bf.js.map": "/parcel-manager/static/js/main.44aed5bf.js.map"
   },
   "entrypoints": [
     "static/css/main.c7e4ff50.css",
-    "static/js/main.77ee69d8.js"
+    "static/js/main.44aed5bf.js"
   ]
 }
