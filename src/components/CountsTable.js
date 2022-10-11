@@ -18,7 +18,7 @@ const CountsTable = (props) => {
                     <td>{counts[3]}</td>
                 </tr>
                 <tr>
-                    <th>No In-Hand</th>
+                    <th>No In-Hand Date</th>
                     <td>{counts[4]}</td>
                 </tr>
                 <tr>

@@ -26,3 +26,7 @@ td, th {
 .counts th {
     text-align: left;
 }
+
+thead th:nth-child(n+3):nth-child(-n+8), thead th:first-child {
+    cursor: pointer;
+}

@@ -22,27 +22,32 @@ function App() {
 
   const [stores, setStores] = useState(
     {
-      'WEST PALM BEACH': { number: 550 },
-      'BOYNTON BEACH': { number: 808 },
-      'WELLINGTON': { number: 1168 },
-      'BOCA RATON': { number: 554},
-      'MARGATE': { number: 1424},
-      'CORAL SPRINGS': { number: 1136},
-      'SAWGRASS': { number: 551},
-      'FORT LAUDERDALE': { number: 543 },
-      'DAVIE': { number: 1258 },
-      'PEMBROKE PINES': { number: 559},
-      'AVENTURA': { number: 558},
-      'MIAMI BEACH': { number: 1498},
-      'HIALEAH': { number: 555},
-      'DORAL': { number: 1502},
-      'PINECREST': { number: 1503},
-      'DADELAND': { number: 557},
-      'WEST KENDALL': { number: 552},
-      'TROPICAIRE': { number: 553},
-      'FORT MYERS': { number: 431}
+      'WEST PALM BEACH': { number: 550, i: 0 },
+      'BOYNTON BEACH': { number: 808, i: 1 },
+      'WELLINGTON': { number: 1168, i: 2 },
+      'BOCA RATON': { number: 554, i: 3},
+      'MARGATE': { number: 1424, i: 4},
+      'CORAL SPRINGS': { number: 1136, i: 5},
+      'SAWGRASS': { number: 551, i: 6},
+      'FORT LAUDERDALE': { number: 543, i: 7 },
+      'DAVIE': { number: 1258 , i: 8},
+      'PEMBROKE PINES': { number: 559, i: 9},
+      'AVENTURA': { number: 558, i: 10},
+      'MIAMI BEACH': { number: 1498, i: 11},
+      'HIALEAH': { number: 555, i: 12},
+      'DORAL': { number: 1502, i: 13},
+      'PINECREST': { number: 1503, i: 14},
+      'DADELAND': { number: 557, i: 15},
+      'WEST KENDALL': { number: 552, i: 16},
+      'TROPICAIRE': { number: 553, i: 17},
+      'FORT MYERS': { number: 431, i: 18}
   }
   )
+
+  const originalOrder = Object.keys(stores)
+    .sort((a, b) => stores[a].i - stores[b].i)
+
+  const [storeOrder, setStoreOrder] = useState(originalOrder)
 
   const handleChange = e => {
     const data = e.target.value;
@@ -65,6 +70,18 @@ function App() {
 
   const handleCopyClick = e => {
     copyTable();
+  }
+
+  const handleFieldClick = e => {
+    let i = e.target.dataset.i;
+    if (i == '') {
+      setStoreOrder(originalOrder);
+      return;
+    }
+    i = Number(i);
+    setStoreOrder(originalOrder.sort((a, b) => {
+      return stores[b].counts[i] - stores[a].counts[i];
+    }))
   }
 
   const copyTable = () => {
@@ -130,7 +147,8 @@ function App() {
         <button className={'btn btn-info w-100'}
         onClick={handleCopyClick}>Copy Table</button>
       }
-      <MainTable stores={stores} fillRow={fillRow}/>
+      <MainTable sortBy={handleFieldClick} 
+      order={storeOrder} stores={stores} fillRow={fillRow}/>
         <CopyTable stores={stores} tableIsFilled={tableIsFilled}/>
     </div>
   );
