@@ -84,6 +84,10 @@ function App() {
     }))
   }
 
+  const handleInputClick = e => {
+    e.target.value = '';
+  }
+
   const copyTable = () => {
     if (!document.createRange || !window.getSelection) return;
     const table = document.querySelector('#copy-table');
@@ -134,6 +138,7 @@ function App() {
   return (
     <div className="App">
       <Input handleChange={handleChange} counts={counts}
+      clear={handleInputClick}
       currentStore={currentStore} handleClick={handleCountClick}/>
       <div className='row'>
         <div className='col-md-6'>

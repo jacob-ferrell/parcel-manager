@@ -9,6 +9,7 @@ const Input = (props) => {
             <div className='form-group'>
                     <textarea className='form-control' rows='3'
                     onChange={props.handleChange}
+                    onClick={props.clear}
                     placeholder="Paste Content Here">
                     </textarea>
                     
